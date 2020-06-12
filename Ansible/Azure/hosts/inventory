@@ -1,0 +1,2 @@
+[controlserver]
+ACS ansible_ssh_host=XXXX ansible_ssh_user=XXXX ansible_ssh_private_key=/Users/debasis/Documents/Githib_Projects_Applications/private.pem

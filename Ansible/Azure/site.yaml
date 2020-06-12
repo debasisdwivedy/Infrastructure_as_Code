@@ -1,0 +1,4 @@
+---
+# Task creation for logs ...
+# Pass parameters from command prompt and use the variable here as when ....{ansible-playbook site.yaml}
+- include: provision.yaml

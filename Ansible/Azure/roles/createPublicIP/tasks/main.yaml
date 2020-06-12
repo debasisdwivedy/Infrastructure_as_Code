@@ -1,0 +1,8 @@
+---
+- block:
+  - name: "Create public IP address {{ ip_name }}"
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group_name }}"
+      allocation_method: "{{ ip_type }}"
+      name: "{{ ip_name }}"
+

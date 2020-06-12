@@ -1,0 +1,9 @@
+---
+- block:
+  - name: Create an availability set with default options
+    azure_rm_availabilityset:
+      name: "{{ availability_set_name }}"
+      location: "{{ resource_group_region }}"
+      resource_group: "{{ resource_group_name }}"
+
+

@@ -1,0 +1,56 @@
+---
+# Create Resource Group Variables
+resource_group_name: myResourceGroup
+resource_group_region: "East US"
+resource_group: true
+
+# Create Availability Set
+availability_set_name: myavailabilityset
+availability_set: true
+
+# Create Virtual Network Variables
+virtual_network_name: myVnet
+virtual_network_address: "10.0.0.0/16"
+virtual_network: true
+
+# Create Subnet Variables
+subnet_name: mySubnet
+subnet_address: "10.0.1.0/24"
+subnet: true
+
+# Create Public IP
+ip_name: myPublicIP
+ip_type: Dynamic
+public_ip: true
+
+# Create Network Security Variables for inbound and outbound ports
+security_group_name: myNetworkSecurityGroup
+open_ports: true
+ssh: true
+ssh_port: 22
+ssh_port_priority: 1001
+protocol_type: Tcp
+ports_allowed: {1003: 9080, 1004: 9443}
+
+# Create Virtual Network Card
+network_interface_card_name: myNIC
+network_card: true
+
+# Create Virtual Machine Variables
+virtual_machine_name: vm1
+virtual_machine_size: Standard_DS1_v2
+managed_disk_type: Standard_LRS
+logical_unit: 0
+disk_size: 100
+disk_name: datadisk1
+disk_blob_name: datadisk1.vhd
+user_name: ''
+password: ''
+os_type: CentOS
+os_publisher: OpenLogic
+os_sku: '7.5'
+os_version: latest
+ssh_folder: "~/.ssh"
+ssh_data: "ssh-rsa AAAAB3Nz{snip}hwhqT9h"
+passwordless_login: false
+

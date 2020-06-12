@@ -1,0 +1,43 @@
+---
+- block:
+  - name: "Create {{ os_type }} VM with SSH Key"
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group_name }}"
+      name: "{{ virtual_machine_name }}"
+      vm_size: "{{ virtual_machine_size }}"
+      availability_set: "{{ availability_set_name }}"
+      managed_disk_type: "{{ managed_disk_type }}"
+      admin_username: "{{ user_name }}"
+      ssh_password_enabled: false
+      ssh_public_keys:
+        - path: "{{ ssh_folder }}/authorized_keys"
+          key_data: "{{ ssh_data }}"
+      network_interfaces: "{{ network_interface_card_name }}"
+      image:
+        offer: "{{ os_type }}"
+        publisher: "{{ os_publisher }}"
+        sku: "{{ os_sku }}"
+        version: "{{ os_version }}"
+      data_disks:
+          - lun: "{{ logical_unit }}"
+            disk_size_gb: "{{ disk_size }}"
+            storage_container_name: "{{ disk_name}}"
+            storage_blob_name: "{{ disk_blob_name }}"
+    when: passwordless_login
+
+
+  # - name: "Create {{ os_type }} VM with password"
+  #   azure_rm_virtualmachine:
+  #     resource_group: "{{ resource_group_name }}"
+  #     name: "{{ virtual_machine_name }}"
+  #     vm_size: "{{ virtual_machine_size }}"
+  #     availability_set: "{{ availability_set_name }}"
+  #     admin_username: "{{ user_name }}"
+  #     admin_password: "{{ password }}"
+  #     network_interfaces: "{{ network_interface_card_name }}"
+  #     image:
+  #       offer: "{{ os_type }}"
+  #       publisher: "{{ os_publisher }}"
+  #       sku: "{{ os_sku }}"
+  #       version: "{{ os_version }}"
+  #   when: not passwordless_login

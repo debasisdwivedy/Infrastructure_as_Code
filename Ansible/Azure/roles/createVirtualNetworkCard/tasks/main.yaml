@@ -1,0 +1,11 @@
+---
+- block:
+  - name: "Create virtual network inteface card {{ network_interface_card_name }} "
+    azure_rm_networkinterface:
+      resource_group: "{{ resource_group_name }}"
+      name: "{{ network_interface_card_name }}"
+      virtual_network: "{{ virtual_network_name }}"
+      subnet: "{{ subnet_name }}"
+      public_ip_name: "{{ ip_name }}"
+      security_group: "{{ security_group_name }}"
+

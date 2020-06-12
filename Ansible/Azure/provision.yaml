@@ -1,0 +1,30 @@
+---
+######################################################################################################################
+#                                           Provision virtual machines
+
+#########
+  # Run a task in the ansible control server to provision virtual machine!
+  # host, defines the name of the host that you want this play to run on. The detail of the host-ip can be found in the inventory file.
+  #
+  # The roles that needs to rn for this tasks are : createResourceGroup , createVirtualNetwork , createSubnet , createPublicIP
+  # createNetworkSecurity, createVirtualNetworkCard, createVirtualMachine
+  #
+
+- name: Start provisioning Infrastructure
+  hosts: ACS
+  roles:
+     - role: createResourceGroup
+       when: resource_group
+     - role: createAvailabilitySet
+       when: availability_set
+     - role: createVirtualNetwork
+       when: virtual_network
+     - role: createSubnet
+       when: subnet
+     - role: createPublicIP
+       when: public_ip
+     - role: createNetworkSecurity
+       when: open_ports
+     - role: createVirtualNetworkCard
+       when: network_card
+     - role: createVirtualMachine

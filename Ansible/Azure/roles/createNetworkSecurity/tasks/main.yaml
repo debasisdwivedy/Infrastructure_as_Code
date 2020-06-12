@@ -1,0 +1,42 @@
+---
+- block:
+  - name: Create Network Security Group that allows SSH
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group_name }}"
+      name: "{{ security_group_name }}"
+      rules:
+        - name: AllowSSH
+          protocol: "{{ protocol_type }}"
+          destination_port_range: "{{ ssh_port }}"
+          access: Allow
+          priority: "{{ ssh_port_priority }}"
+          direction: Inbound
+    when: ssh
+
+  - name: Create Network Security Group that deny SSH
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group_name }}"
+      name: "{{ security_group_name }}"
+      rules:
+        - name: DenySSH
+          protocol: "{{ protocol_type }}"
+          destination_port_range: "{{ ssh_port }}"
+          access: Deny
+          priority: "{{ ssh_port_priority }}"
+          direction: Inbound
+    when: not ssh
+
+  - name: Create Network Security Group to allow ports
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group_name }}"
+      name: "{{ security_group_name }}"
+      rules:
+        - name: AllowPorts
+          protocol: "{{ protocol_type }}"
+          destination_port_range: "{{ item.value }}"
+          access: Allow
+          priority: "{{ item.key }}"
+          direction: Inbound
+    with_dict: "{{ ports_allowed }}"
+
+
